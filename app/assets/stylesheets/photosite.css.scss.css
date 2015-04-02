@@ -1,0 +1,241 @@
+// Place all the styles related to the tabs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+label.search{
+  font-family: 'Pacifico', cursive;
+  color: #dd7c94;
+}
+
+#search-result{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+img.search-thumbnail {
+    max-width: 100px;
+    padding: 20px;
+}
+
+#img_container {
+    display: inline-block;
+    line-height: 0px;
+    position: relative;
+}
+
+#img_container_index {
+    display: inline-block;
+    line-height: 0px;
+    position: relative;
+}
+
+#tagged-user {
+  visibility: hidden;
+  color: #88102e;
+}
+
+div.select-user {
+  padding-top: 25px;
+  padding-bottom:25px;
+}
+
+#feedback_elem {
+    position: absolute;
+    background-color: rgba(231,184,196, 0.7);
+}
+
+p.upload_text {
+  color: #e18ba0;
+}
+
+div.tag {
+    position: absolute;
+    visibility: hidden;
+    background-color: rgba(231,184,196, 0.5);
+}
+
+div.tag-hover {
+    position: absolute;
+    visibility: hidden;
+    background-color: rgba(231,184,196, 0.5);
+}
+
+div.comment {
+  text-align: center;
+  padding-right: 25px;
+  padding-left:25px;
+  padding-top: 15px;
+  padding-bottom:15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #edb9c6;
+  background-color: rgba(255,255,255, 0);
+  width: 75%;
+}
+
+div.banner {
+  text-align: left;
+  padding-left: 10px;
+  margin-bottom: 30px;
+  background-color: #c92e54;
+  height: 30px;
+}
+
+table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+
+td { 
+    padding: 10px;
+}
+
+div.header {
+  margin-bottom:50px;
+  background-color: rgba(255,255,255, 0);
+}
+
+img.photo {
+    max-width: 600px;
+}
+
+img.thumbnail {
+    max-width: 100px;
+}
+
+div.photo {
+  text-align: center;
+  padding-right: 25px;
+  padding-left:25px;
+  padding-top: 25px;
+  padding-bottom:25px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 30px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #db738d;
+  background-color: rgba(255,255,255, 0);
+  width: 60%;
+  display: inline-block
+}
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+div.comment2 {
+  text-align: center;
+  padding-right: 50px;
+  padding-left:50px;
+  padding-top: 50px;
+  padding-bottom:50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #c31742;
+  border-radius: 7px;
+  background-color: rgba(255,255,255, 0);
+  width: 50%;
+}
+
+h1.custom {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+  	margin: .1em 0;
+ 	font-size: 3em;
+ 	/* color: #85182a;*/
+ 	/*color: #e62757;*/
+ 	color: #c31742;
+ 	/*color: #cf234e;*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p, 
+body, {
+    font-family: 'Open Sans', sans-serif;
+    color: #c31742;
+}
+
+h1.user{
+    font-family: 'Pacifico', cursive;
+    color: #c31742;
+}
+
+h2.not-found {
+	font-family: 'Open Sans', sans-serif;
+	 color: #c31742;
+}
+
+div.home-icon{
+	color: #c31742;
+}
+
+a.new_comment{
+  font-family: 'Pacifico', cursive;
+  color: #af143b;
+  text-decoration: none;
+}
+
+p.tag_text{
+  font-family: 'Pacifico', cursive;
+  color: #af143b;
+  text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: #af143b;
+}
+
+a:hover {
+   	color: #db738d;
+    text-decoration: none;
+}
+
+a.user_index {
+    color: #af143b;
+    text-decoration: underline;
+}
+
+a.user_index:hover {
+    color: #db738d;
+    text-decoration: underline;
+}
+
+
+div.banner_hello {
+    text-decoration: none;
+    font-family: 'Pacifico', cursive;
+    color: #f3d0d9;
+}
+
+a.banner_logout {
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+a.banner_text:hover {
+    color: #f3d0d9;
+    text-decoration: none;
+}
+
+img.sparkle{
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+}

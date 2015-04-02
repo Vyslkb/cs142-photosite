@@ -1,0 +1,41 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, "My Photo Website Users" %>
+<%= render "layouts/nav" %>
+
+<h2>My Photo Website Users</h2>
+<%= form_tag("post_submit", :method => "post", 
+      :onkeyup => "newsearch();", :onsubmit => "return false;") do %>
+   <%= label_tag(:text_val, "Search: ", class: 'search') %>
+   <%= text_field_tag(:text_val, '', :id => "search") %>
+<% end %>
+<div id="search-result"></div>
+<% if @users %>
+   <% @users.each do |u| %>
+      <p>
+         <%= link_to(u.get_name, controller: "photos", action: "index", id: u.id)%>
+      </p>
+   <% end %>
+<% end %>
+
+<%= javascript_include_tag "AjaxWrapper" %>
+<script type="text/javascript">
+  //<![CDATA[
+   var callback = function(response) {
+      var html = "";
+      var urlPrefix = "/photos\/index\/";
+      if (response) {
+         for (var i = 0; i < response.length; i++) {
+            html += "<a href=\""+urlPrefix+response[i].user_id+"\">";
+            html += "<img src=\"\/assets\/"+response[i].file_name+"\" class=\"search-thumbnail\"><\/a>";
+         }
+      }
+      return html;
+   }
+   newsearch = function() {
+      var searchtxt = document.getElementById("search").value;
+      encodeURIComponent(searchtxt);
+      AjaxWrapper.handler("/photos/search?str=",searchtxt,"search-result",callback);
+      return false;
+   }
+  //]]>
+</script>

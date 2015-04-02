@@ -1,0 +1,28 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, "Create New Account" %>
+<h2 class="user">Create Your New Account</h2>
+<% if flash[:notice] %>
+ <p><%= flash[:notice] %></p>
+<% end %>
+<%= form_for(@user, method: :post,
+    url: {action: :create}) do |f| %>
+   <p>
+      <%= f.label(:first_name) %><br/>
+      <%= f.text_field(:first_name) %>
+   </p>
+   <p>
+      <%= f.label(:last_name) %><br/>
+      <%= f.text_field(:last_name) %>
+   </p>
+   <p>
+      <%= f.label(:login) %><br/>
+      <%= f.text_field(:login) %>
+   </p>
+   <p>
+      <%= f.label(:password) %><br/>
+      <%= f.password_field(:password) %>
+   </p>
+   <p>
+       <%= f.submit "CREATE ACCOUNT"%>
+   </p>
+<% end %>

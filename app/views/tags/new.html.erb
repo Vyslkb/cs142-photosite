@@ -1,0 +1,71 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, "View and Add Tags" %>
+<%= render "layouts/nav" %>
+<% if flash[:notice] %>
+	<p><%= flash[:notice] %></p>
+<% end %>
+<% if session[:user] %>
+	<div class="photo">
+		<div class="select-user">
+			<label for="new_tag">select user to tag:</label>
+			<%= form_for(@tag, method: :post, url: {action: :create, photo_id: @photo.id}) do |f| %>
+				<%= f.hidden_field :xpos%>
+				<%= f.hidden_field :ypos%>
+				<%= f.hidden_field :height%>
+				<%= f.hidden_field :width%>
+				<%= f.collection_select :user, User.all, :id, :get_name %>
+				<%= f.submit "submit", id: "submit_button", disabled: true %>
+			<% end %>
+		</div>
+		<div id="img_container">
+			<%= image_tag(@photo.file_name, class: "photo", id: "current_photo") %>
+			<!-- this div is used as the tagging feedback element -->
+			<div id="feedback_elem"></div>
+			<!-- get tags to be displayed -->
+			<% tags = @photo.tags %>
+			<!-- create the TagViewer, used to display stored tags on photos -->
+			<%= javascript_include_tag "TagViewer" %>
+			<script type="text/javascript">
+  			//<![CDATA[
+  				var tagviewer = new TagViewer("tagged-user", "tag");  		
+  			//]]>
+			</script>
+			<!-- create a new tag display element for each tag -->
+			<% tags.each do |t| %>
+				<div class="tag" onmouseover="tagviewer.showTag(this)" 
+					 onmouseout="tagviewer.unshowTag(this)"
+					 style="visibility:hidden;" id="tag<%=t.id.to_s%>">
+				</div>
+				<!-- create a new tag object, which is initialized within the TagViewer, -->
+				<!-- which also stores info relevant to displaying names of tagged users -->
+				<script type="text/javascript">
+      				tag = new Object();
+      				tag.xvalue = "<%= t.xpos %>";
+      				tag.yvalue = "<%= t.ypos %>";
+      				tag.wvalue = "<%= t.width %>";
+      				tag.hvalue = "<%= t.height %>";
+      				tag.tagged_name = "<%= User.find_by_id(t.user_id).get_name %>";
+      				tag.tagID = "tag<%=t.id.to_s%>";
+      				tagviewer.initTag(tag);
+  				</script>
+			<% end %>
+		</div>
+		<div>
+      		<p> 
+      			<input type="checkbox" onchange="tagviewer.toggleCheckbox(this); return false;"/>
+      			display tags
+      		</p>
+      		<!-- the name of the tagged user will be filled in by the TagViewer -->
+      		<p id="tagged-user">[placeholder]</p>
+    	</div>
+	</div>
+<% else %>
+	<h2 class="not-found">YOU MUST BE LOGGED IN TO TAG A PHOTO!</h2>
+<% end %>
+
+<%= javascript_include_tag "Tagger" %>
+<script type="text/javascript">
+  //<![CDATA[
+  new Tagger("img_container","feedback_elem","tag_xpos","tag_ypos","tag_width","tag_height", "submit_button");
+  //]]>
+</script>

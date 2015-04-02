@@ -1,0 +1,43 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, @name %>
+<%= render "layouts/nav" %>
+<% if flash[:notice] %>
+ <p><%= flash[:notice] %></p>
+<% end %>
+<% if @found %>
+   <h1 class="user"><%= @name %></h1>
+   <% @photos.each do |photo| %>
+      <!-- this div contains photo, its info, settings and all comments -->
+      <div class="photo">
+         <!-- this parent div is used to implement setting / viewing tags -->
+         <div id="img_container_index">
+            <%= image_tag(photo.file_name, class: "photo") %>
+         </div>
+         <!-- if the user is logged in, display links to add comments / tags -->
+         <p class="upload_text"> uploaded at <%= photo.date_time.getlocal() %> </p>
+         <div>
+            <% if session[:user] %>
+               <%= link_to "add new comment", {controller: "comments", action: "new", 
+                  id: photo.id}, class: "new_comment"%>
+               <span><%= image_tag("sparkle.png", class: "sparkle")%></span>
+               <%= link_to "view & add tags", {controller: "tags", action: "new", 
+                  id: photo.id}, class: "new_comment"%>
+            <% end %>
+         </div>
+         <!-- display comments -->
+         <% comments = photo.comments %>
+         <% comments.each do |c| %>
+            <div class="comment">
+               <% user = User.find(c.user_id) %>
+               <% name = user.first_name + " " + user.last_name %>
+               <h3><%= link_to(name, controller: "photos", action: "index", id: c.user_id)%></h3>
+               <p><%= c.comment %></p>
+               <p><%= c.date_time.getlocal() %></p>
+            </div>
+         <% end %>
+         <!--end of comments -->
+      </div>
+   <% end %>
+<% else %>
+<h2 class="not-found">USER NOT FOUND!</h2>
+<% end %>

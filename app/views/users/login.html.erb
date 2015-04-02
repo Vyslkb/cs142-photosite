@@ -1,0 +1,21 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, "CS247 P4 Login" %>
+<div class="header"></div>
+<% if flash[:notice] %>
+ <p><%= flash[:notice] %></p>
+<% end %>
+<h1>LOGIN</h1>
+<div>
+<%= form_tag("post_login", :method => "post") do %>
+   <p>
+   <%= label_tag(:name, "Enter your name:") %>
+   <%= text_field_tag(:name) %>
+   </p>
+   <p>
+   <%= label_tag(:password, "Enter your password:") %>
+   <%= password_field_tag(:password) %>
+   </p>
+ <%= submit_tag("Login") %>
+<% end %>
+</div>
+<h3><%= link_to("Create New User", action: "new")%></h3>

@@ -1,0 +1,23 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, "Add a new comment" %>
+<%= render "layouts/nav" %>
+<% if session[:user] %>
+    <% if @found %>
+        <h2 class="user">Add a new comment to this photo</h2>
+        <%= image_tag(@photo.file_name, class: "thumbnail") %>
+        <%= form_for(@comment, method: :post,
+        url: {action: :create, id: @photo.id}) do |f| %>
+          <p>
+            <%= f.label(:comment) %><br/>
+            <%= f.text_area(:comment) %>
+          </p>
+          <p>
+            <%= f.submit "SUBMIT COMMENT"%>
+          </p>
+        <% end %>
+    <% else %>
+        <h2 class="not-found">PHOTO NOT FOUND!</h2>
+    <% end %>
+<% else %>
+    <h2 class="not-found">YOU MUST BE LOGGED IN TO COMMENT ON A PHOTO!</h2>
+<% end %>

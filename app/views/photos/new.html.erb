@@ -1,0 +1,17 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, "Upload a new photo" %>
+<%= render "layouts/nav" %>
+<% if session[:user] %>
+   <h2 class="user">Upload a new photo</h2>
+   <%= form_for(@photo, method: :post,
+       url: {action: :create}) do |f| %>
+      <p>
+          <%= f.file_field(:file) %>
+      </p>
+      <p>
+          <%= f.submit "UPLOAD"%>
+      </p>
+   <% end %>
+<% else %>
+   <h2 class="not-found">YOU MUST BE LOGGED IN TO UPLOAD A PHOTO!</h2>
+<% end %>

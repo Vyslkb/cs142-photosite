@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><%= yield(:title)%></title>
+  <%= stylesheet_link_tag 'application', media: 'all'%>
+  <%= yield :stylesheet %>
+  <%= csrf_meta_tags %>
+  <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css"/>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" 
+      rel='stylesheet' type='text/css'/>
+</head>
+<body>
+   <h1 class="custom">Jennifer Farman</h1>
+   <div> <%= image_tag("ruby.gif", height: '76', width: '100', class: "ruby") %> </div>
+   <div class="outer">
+      <div class="inner">
+         <div class="banner">
+            <div class="banner_hello">
+               <% if session[:user] %> Hello <%=session[:user].first_name%>!
+                  <a href="../../users/logout" class="banner_logout">LOGOUT</a>
+               <% else %> 
+                  <a href="../../users/login" class="banner_logout">LOGIN</a>
+               <% end %> 
+            </div>
+         </div>
+      <!-- - - -->
+      <%= yield %>
+      <!-- - - -->
+      </div>
+   </div>
+</body>
+</html>

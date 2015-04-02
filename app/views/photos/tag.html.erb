@@ -1,0 +1,45 @@
+<% content_for :stylesheet, (stylesheet_link_tag "photosite") %>
+<% content_for :title, "Tag this photo" %>
+<%= render "layouts/nav" %>
+<% if session[:user] %>
+   <div class="photo">
+      <div id="img_container">
+         <%= image_tag(@photo.file_name, class: "photo", id: "current_photo") %>
+         <div id="feedback_elem"></div>
+         <!-- hidden form elements to be filled in by the tagger class -->
+         <form>
+            <input type="hidden" id="xvalue">
+            <input type="hidden" id="yvalue">
+            <input type="hidden" id="height">
+            <input type="hidden" id="width">
+         </form>
+      </div>
+      <p> uploaded at <%= @photo.date_time.getlocal() %> </p>
+      <div>
+            <p> 
+               <input type="checkbox" onchange="Tagger.toggleCheckbox(this); return false;">
+               display tags
+            </p>
+      </div>
+      <label for="user_select">select user to tag:</label>
+      <form name="user_select">
+         <select>
+            <% @users.each do |u| %>
+               <% name = u.first_name + " " + u.last_name %>
+               <option value=<%=u.id%>><%=name%></option>
+            <% end %>
+         </select>
+         <button onclick="Tagger.submitTag(this); return false;">submit</button>
+      </form> 
+      </p>
+   </div>
+<% else %>
+   <h2 class="not-found">YOU MUST BE LOGGED IN TO TAG A PHOTO!</h2>
+<% end %>
+
+<%= javascript_include_tag "Tagger" %>
+<script type="text/javascript">
+  //<![CDATA[
+  new Tagger("img_container","feedback_elem","xvalue","yvalue","width","height");      
+  //]]>
+</script>
